@@ -1,4 +1,4 @@
-
+import { createStore } from 'redux';
 
 const reducer = (state = 0, action) => {
 
@@ -7,17 +7,31 @@ const reducer = (state = 0, action) => {
     case 'INC':
       return state + 1;
 
+    case 'DEC':
+      return state - 1;
+
     default:
       return state;
   }
 };
 
-let state = reducer(undefined, {});
+const store = createStore(reducer);
 
-state = reducer(state, { type: 'INC' });
+document
+  .getElementById('inc')
+  .addEventListener('click', () => {
+    store.dispatch({type: 'INC'});
+  });
+document
+  .getElementById('dec')
+  .addEventListener('click', () => {
+    store.dispatch({type: 'DEC'});
+  });
 
-console.log(state);
+  const update = () => {
+    document
+      .getElementById('counter')
+      .innerHTML = store.getState();
+  }
 
-state = reducer(state, { type: 'INC' });
-
-console.log(state);
+  store.subscribe(update)
