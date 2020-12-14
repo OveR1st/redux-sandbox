@@ -1,4 +1,4 @@
-const reducer = (state = 19, action) => {
+const reducer = (state = 0, action) => {
 
 
   switch (action.type) {
